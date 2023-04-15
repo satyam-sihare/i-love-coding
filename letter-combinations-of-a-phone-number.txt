@@ -1,0 +1,37 @@
+#define ss string
+#define pb push_back
+class Solution {
+public:
+    vector<string> gen(vector<ss> str,int in){
+        vector<ss> res,res1;
+        if(in==str.size())
+        {
+            res.pb("");
+            return res;
+        }
+        res=gen(str,in+1);
+        ss chars=str[in];
+        for(int i=0;i<res.size();i++){
+            for(int j=0;j<chars.size();j++){
+                ss s1="";
+                s1+=chars[j];
+                s1+=res[i];
+                res1.pb(s1);
+            }
+        }
+        return res1;
+    }
+    vector<string> letterCombinations(string digits) {
+
+        string comb[8]={"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        vector<ss> perm;
+        if(digits.size()==0)
+        return perm;
+        for(int i=0;i<digits.size();i++){
+            int pos=digits[i]-'2';
+            perm.pb(comb[pos]);
+        }
+        perm=gen(perm,0);
+        return perm;
+    }
+};
