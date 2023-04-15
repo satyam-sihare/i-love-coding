@@ -1,0 +1,28 @@
+#define ss string
+#define pb push_back
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        if(n==0){
+            res.pb("");
+            return res;
+        }
+        if(n==1){
+            res.pb("()");
+            return res;
+        }
+
+        for(int l=0;l<=n-1;l++){
+            int r=n-l-1;
+            vector<ss> lp=generateParenthesis(l);
+            vector<ss> rp=generateParenthesis(r);
+            for(int i=0;i<lp.size();i++){
+                for(int j=0;j<rp.size();j++){
+                    res.pb("("+lp[i]+")"+rp[j]);
+                }
+            }
+        }
+        return res;
+    }
+};
