@@ -1,0 +1,32 @@
+#define mp make_pair
+#define pb push_back
+#define f first
+#define s second
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        set<pair<int,int> > unq;
+        vector<int> num=nums;
+        sort(num.begin(),num.end());
+        multiset<int> rem;
+        for(int i=1;i<num.size();i++)
+        rem.insert(num[i]);
+        for(int i=1;i<num.size();i++){
+            rem.erase(rem.find(num[i]));
+            for(int j=0;j<i;j++){
+                int sum=num[i]+num[j];
+                pair<int,int> ind=mp(num[i],num[j]);
+                if(rem.find(-sum)!=rem.end() && unq.find(ind)==unq.end()){
+                    unq.insert(ind);
+                }
+            }
+        }
+        vector<vector<int>> res;
+        for(auto it:unq){
+            vector<int> comb={it.f,it.s};
+            comb.pb(-(it.f+it.s));
+            res.pb(comb);
+        }
+        return res;
+    }
+};

@@ -1,0 +1,62 @@
+class Solution {
+public:
+    bool check(int r,int c,vector<vector<char>>& b){
+        set<int> unq;
+        for(int i=r;i<r+3;i++){
+            for(int j=c;j<c+3;j++){
+                if(b[i][j]=='.')
+                continue;
+                if(unq.find(b[i][j])!=unq.end())
+                return false;
+                unq.insert(b[i][j]);
+            }
+        }
+        return true;
+    }
+    bool checkH(int r,vector<vector<char>>& b){
+        set<int> unq;
+        for(int c=0;c<9;c++)
+        {
+            if(b[r][c]=='.')
+                continue;
+            if(unq.find(b[r][c])!=unq.end())
+            return false;
+            unq.insert(b[r][c]);
+        }
+        return true;
+    }
+    bool checkV(int c,vector<vector<char>>& b){
+        set<int> unq;
+        for(int r=0;r<9;r++)
+        {
+            if(b[r][c]=='.')
+                continue;
+            if(unq.find(b[r][c])!=unq.end())
+            return false;
+            unq.insert(b[r][c]);
+        }
+        return true;
+    }
+    bool isValidSudoku(vector<vector<char>>& board) {
+        bool poss=true;
+        for(int i=0;i<9;i++){
+            if(!checkH(i,board)){
+                poss=false;
+                cout<<i<<endl;
+            }
+            if(!checkV(i,board)){
+                poss=false;
+                cout<<i<<"pjiu"<<endl;
+            }
+        }
+        int arr[9][2]={{0,0},{0,3},{0,6},{3,0},{3,3},{3,6},{6,0},{6,3},{6,6}};
+        for(int i=0;i<9;i++){
+            if(!check(arr[i][0],arr[i][1],board))
+            poss=false;
+        }
+        if(poss)
+        return true;
+        return false;
+
+    }
+};

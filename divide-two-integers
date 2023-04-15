@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        int lmax=-INT_MAX,rmax=INT_MAX;
+        lmax-=1;
+        if(divisor==-1){
+            if(dividend==lmax)
+            {
+                return rmax;
+            }
+            else
+            return -dividend;
+        }
+        else if(divisor==1){
+            return dividend;
+        }
+        else{
+            bool positive=true;
+            if(dividend>0&&divisor<0)
+            positive=false;
+            else if(dividend<0&&divisor>0)
+            positive=false;
+            int ans=0,val=0;
+            if(dividend>0)
+            dividend=-dividend;
+            if(divisor>0)
+            divisor=-divisor;
+            while(1){
+                if(val<INT_MIN-divisor)
+                break;
+                if((val+divisor)>=dividend){
+                    ans++;
+                    val+=divisor;
+                }
+                else
+                break;
+            }
+            if(positive)
+            return ans;
+            else
+            return -ans;
+        }
+    }
+};
