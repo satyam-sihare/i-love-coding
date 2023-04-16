@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string countAndSay(int n) {
+        string ans="1#",temp;
+        n--;
+        while(n--){
+            int fre=0,num=-1;
+            temp="";
+            for(int i=0;i<ans.size();i++){
+                if(ans[i]==num)
+                fre++;
+                else{
+                    if(fre)
+                    {
+                        temp+=(fre+'0');
+                        temp+=num;
+                    }
+                    num=ans[i];
+                    fre=1;
+                }
+            }
+            ans=temp+"#";
+        }
+        int sz=ans.size();
+        ans=ans.substr(0,sz-1);
+        return ans;
+    }
+};
